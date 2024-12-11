@@ -1,0 +1,13 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+
+  .title {
+    align-items: center;
+  }
+
+  .btn {
+    display: flex;
+    gap: 10px;
+  }
+}
