@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/scss/image-gallery.scss";
-import { Col, Row, Modal, Rate, Divider } from "antd";
+import { Col, Row, Modal, Rate, Divider, message } from "antd";
 import { useState, useRef } from "react";
 import ModalGallery from "./ModalDetail";
 import "./BookDetail.scss";
@@ -51,6 +51,7 @@ const BookDetail = (props) => {
 
   const handleAdd = (quantity, book) => {
     dispatch(addToCart({ quantity: quantity, _id: book._id, data: book }));
+    message.success("Thêm sản phẩm vào giỏ hàng thành công!");
   };
 
   return (

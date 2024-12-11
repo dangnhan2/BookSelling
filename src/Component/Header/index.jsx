@@ -2,19 +2,21 @@ import React, { useState } from "react";
 import { FaReact } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import { VscSearchFuzzy } from "react-icons/vsc";
-import { Divider, Badge, Drawer, message } from "antd";
+import { Divider, Badge, Drawer, message, Popover } from "antd";
 import "./header.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Avatar } from "antd";
 import { useNavigate } from "react-router";
 import { UserLogout } from "../../redux/account/account.slice";
+import PopoverCart from "./Popover";
 const Header = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const isAuthenticated = useSelector((state) => state.account.isAuthenticated);
   const user = useSelector((state) => state.account.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const quantity = useSelector((state) => state.order.cart.length);
   const handleLogout = () => {
     dispatch(UserLogout());
     navigate("/");
@@ -57,8 +59,8 @@ const Header = () => {
               ☰
             </div>
             <div className="page-header__logo">
-              <span className="logo">
-                <FaReact className="rotate icon-react" /> Hỏi Dân IT
+              <span className="logo" onClick={() => navigate("/")}>
+                <FaReact className="rotate icon-react" /> Nhan Book Shop
                 <VscSearchFuzzy className="icon-search" />
               </span>
               <input
@@ -72,9 +74,15 @@ const Header = () => {
             <nav className="page-header__bottom">
               <ul id="navigation" className="navigation">
                 <li className="navigation__item">
-                  <Badge count={5} size={"small"}>
-                    <FiShoppingCart className="icon-cart" />
-                  </Badge>
+                  <Popover
+                    placement="topRight"
+                    title="Sản phẩm mới thêm"
+                    content={<PopoverCart></PopoverCart>}
+                  >
+                    <Badge count={quantity} size={"small"}>
+                      <FiShoppingCart className="icon-cart" />
+                    </Badge>
+                  </Popover>
                 </li>
                 <li className="navigation__item mobile">
                   <Divider type="vertical" />

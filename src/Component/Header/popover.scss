@@ -1,0 +1,39 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+  .container:hover {
+    background-color: grey;
+  }
+  .container-product {
+    display: flex;
+    gap: 10px;
+  }
+  .container-product img {
+    width: 60px;
+    height: 70px;
+  }
+  .container-product .title {
+    font-size: 15px;
+  }
+
+  .container-product .price {
+    font-size: 15px;
+    color: red;
+  }
+
+  .container-btn {
+    display: flex;
+    margin-top: 10px;
+    justify-content: flex-end;
+  }
+
+  .container-btn .btn {
+    padding: 10px 15px;
+    background-color: #ee4d2d;
+    border: 1px solid #ee4d2d;
+    border-radius: 5px;
+    color: white;
+  }
+}
