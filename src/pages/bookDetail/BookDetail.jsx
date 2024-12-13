@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/order/order.slice";
 const BookDetail = (props) => {
   const { data } = props;
-  console.log(data);
+  // console.log(data);
   const [isOpenModalGallery, setIsOpenModalGallery] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -50,6 +50,7 @@ const BookDetail = (props) => {
   };
 
   const handleAdd = (quantity, book) => {
+    // console.log(book);
     dispatch(addToCart({ quantity: quantity, _id: book._id, data: book }));
     message.success("Thêm sản phẩm vào giỏ hàng thành công!");
   };

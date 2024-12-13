@@ -1,4 +1,3 @@
-import { Button, Popover, ConfigProvider } from "antd";
 import "./popover.scss";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -47,6 +46,7 @@ const PopoverCart = () => {
   };
 
   const cart = useSelector((state) => state.order.cart);
+  console.log(cart);
   const navigate = useNavigate();
   const handleRedirect = (data) => {
     const slug = convertSlug(data.data.data.mainText);
@@ -62,20 +62,17 @@ const PopoverCart = () => {
             onClick={() => handleRedirect(cartItem)}
           >
             <img
-              src={`http://localhost:8080/images/book/${cartItem.data.data.thumbnail}`}
+              src={`http://localhost:8080/images/book/${cartItem.data.thumbnail}`}
             ></img>
-            <span className="title">{cartItem.data.data.mainText}</span>
-            <span className="price">{cartItem.data.data.price}đ</span>
+            <span className="title">{cartItem.data.mainText}</span>
+            <span className="price">{cartItem.data.price}đ</span>
           </div>
         ))}
 
-        {/* <div className="container-product">
-          <img src="https://picsum.photos/id/1018/250/150/"></img>
-          <span className="title">Đại việt sử kí toàn thư</span>
-          <span className="price">600.000</span>
-        </div> */}
         <div className="container-btn">
-          <button className="btn">Xem giỏ hàng</button>
+          <button className="btn" onClick={() => navigate("/order")}>
+            Xem giỏ hàng
+          </button>
         </div>
       </div>
     </>

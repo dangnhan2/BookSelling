@@ -18,6 +18,7 @@ import ProtectedRoute from "./Component/ProtectedRoute/index.jsx";
 import LayoutAdmin from "./Component/LayoutAdmin/LayoutAdmin.jsx";
 import UserTable from "./pages/TableUser/TableUser.jsx";
 import BookPageDetail from "./pages/bookDetail/index.jsx";
+import Order from "./pages/order/Order.jsx";
 const Layout = () => {
   return (
     <div className="lay-out">
@@ -64,6 +65,10 @@ function App() {
         {
           path: "book/:slug",
           element: <BookPageDetail />,
+        },
+        {
+          path: "order",
+          element: <Order />,
         },
       ],
     },

@@ -11,32 +11,53 @@ export const orderSlice = createSlice({
     addToCart: (state, action) => {
       let carts = state.cart;
       const item = action.payload;
+      console.log(item.data);
       let isExistIndex = carts.findIndex((c) => c._id === item._id);
       if (isExistIndex > -1) {
         carts[isExistIndex].quantity =
           carts[isExistIndex].quantity + item.quantity;
-        if (carts[isExistIndex].quantity > item.quantity) {
-          carts[isExistIndex].quantity = item.quantity;
+        if (carts[isExistIndex].quantity > item.data.quantity) {
+          carts[isExistIndex].quantity = item.data.quantity;
         }
-
-        // if (isExistProduct > -1) {
-        //     carts[isExistProduct].quantity =
-        //       carts[isExistProduct].quantity + product.quantity;
-        //     if (carts[isExistProduct].quantity > product.quantity) {
-        //       carts[isExistProduct].quantity = product.quantity;
-        //     }
       } else {
         carts.push({
           quantity: item.quantity,
           _id: item._id,
-          data: item,
+          data: item.data,
         });
       }
 
       state.cart = carts;
     },
+
+    doUpdateAction: (state, action) => {
+      let carts = state.cart;
+      const item = action.payload;
+      console.log(item.data);
+      let isExistIndex = carts.findIndex((c) => c._id === item._id);
+      if (isExistIndex > -1) {
+        carts[isExistIndex].quantity = item.quantity;
+        if (carts[isExistIndex].quantity > carts[isExistIndex].data.quantity) {
+          carts[isExistIndex].quantity = carts[isExistIndex].data.quantity;
+        }
+      } else {
+        carts.push({
+          quantity: item.quantity,
+          _id: item._id,
+          data: item.data,
+        });
+      }
+
+      state.cart = carts;
+    },
+
+    doDeleteAction: (state, action) => {
+      console.log(action.payload.id);
+      let carts = state.cart;
+      state.cart = carts.filter((item) => item._id !== action.payload.id);
+    },
   },
 });
 
-export const { addToCart } = orderSlice.actions;
+export const { addToCart, doUpdateAction, doDeleteAction } = orderSlice.actions;
 export default orderSlice.reducer;
