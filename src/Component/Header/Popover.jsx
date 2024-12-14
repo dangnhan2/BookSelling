@@ -1,6 +1,7 @@
 import "./popover.scss";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import NoOder from "../NoOder/NoOder";
 const PopoverCart = () => {
   function toNonAccentVietnamese(str) {
     str = str.replace(/A|Á|À|Ã|Ạ|Â|Ấ|Ầ|Ẫ|Ậ|Ă|Ắ|Ằ|Ẵ|Ặ/g, "A");
@@ -55,25 +56,31 @@ const PopoverCart = () => {
   return (
     <>
       <div className="container">
-        {cart.map((cartItem, index) => (
-          <div
-            className="container-product"
-            key={index}
-            onClick={() => handleRedirect(cartItem)}
-          >
-            <img
-              src={`http://localhost:8080/images/book/${cartItem.data.thumbnail}`}
-            ></img>
-            <span className="title">{cartItem.data.mainText}</span>
-            <span className="price">{cartItem.data.price}đ</span>
-          </div>
-        ))}
+        {cart.length === 0 ? (
+          <NoOder></NoOder>
+        ) : (
+          <>
+            {cart.map((cartItem, index) => (
+              <div
+                className="container-product"
+                key={index}
+                onClick={() => handleRedirect(cartItem)}
+              >
+                <img
+                  src={`http://localhost:8080/images/book/${cartItem.data.thumbnail}`}
+                ></img>
+                <span className="title">{cartItem.data.mainText}</span>
+                <span className="price">{cartItem.data.price}đ</span>
+              </div>
+            ))}
 
-        <div className="container-btn">
-          <button className="btn" onClick={() => navigate("/order")}>
-            Xem giỏ hàng
-          </button>
-        </div>
+            <div className="container-btn">
+              <button className="btn" onClick={() => navigate("/order")}>
+                Xem giỏ hàng
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

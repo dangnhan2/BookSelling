@@ -19,6 +19,7 @@ import LayoutAdmin from "./Component/LayoutAdmin/LayoutAdmin.jsx";
 import UserTable from "./pages/TableUser/TableUser.jsx";
 import BookPageDetail from "./pages/bookDetail/index.jsx";
 import Order from "./pages/order/Order.jsx";
+import PaymentPage from "./pages/payment/PaymentPage.jsx";
 const Layout = () => {
   return (
     <div className="lay-out">
@@ -69,6 +70,10 @@ function App() {
         {
           path: "order",
           element: <Order />,
+        },
+        {
+          path: "payment",
+          element: <PaymentPage />,
         },
       ],
     },

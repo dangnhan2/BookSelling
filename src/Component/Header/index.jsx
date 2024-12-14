@@ -73,7 +73,10 @@ const Header = () => {
           <div>
             <nav className="page-header__bottom">
               <ul id="navigation" className="navigation">
-                <li className="navigation__item">
+                <li
+                  className="navigation__item"
+                  onClick={() => navigate("/order")}
+                >
                   <Popover
                     placement="topRight"
                     title="Sản phẩm mới thêm"
@@ -114,7 +117,7 @@ const Header = () => {
           </div>
         </header>
       </div>
-      <Divider></Divider>
+
       <Drawer
         title="Menu chức năng"
         placement="left"
