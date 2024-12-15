@@ -114,3 +114,7 @@ export const callDeleteBook = (_id) => {
 export const getBookWithId = (_id) => {
   return axios.get(`/api/v1/book/${_id}`);
 };
+
+export const callCreateOrder = (data) => {
+  return axios.post("/api/v1/order", { ...data });
+};

@@ -52,12 +52,17 @@ export const orderSlice = createSlice({
     },
 
     doDeleteAction: (state, action) => {
-      console.log(action.payload.id);
+      // console.log(action.payload.id);
       let carts = state.cart;
       state.cart = carts.filter((item) => item._id !== action.payload.id);
+    },
+
+    doPlaceOrder: (state, action) => {
+      state.cart = [];
     },
   },
 });
 
-export const { addToCart, doUpdateAction, doDeleteAction } = orderSlice.actions;
+export const { addToCart, doUpdateAction, doDeleteAction, doPlaceOrder } =
+  orderSlice.actions;
 export default orderSlice.reducer;

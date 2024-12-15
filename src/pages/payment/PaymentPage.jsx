@@ -1,9 +1,22 @@
-import { Col, Divider, InputNumber, Row, Form, Input, Radio } from "antd";
+import {
+  Col,
+  Divider,
+  InputNumber,
+  Row,
+  Form,
+  Input,
+  Radio,
+  message,
+  notification,
+} from "antd";
 import { FaRegTrashCan } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./Payment.scss";
 import { useEffect } from "react";
+import { callCreateOrder } from "../../service/api";
+import { doPlaceOrder } from "../../redux/order/order.slice";
 const PaymentPage = () => {
+  const dispatch = useDispatch();
   const carts = useSelector((state) => state.order.cart);
   const user = useSelector((state) => state.account.user);
   const [form] = Form.useForm();
@@ -15,7 +28,37 @@ const PaymentPage = () => {
     currency: "VND",
   }).format(totalAmount);
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
+    const { fullName, address, phone } = values;
+    const detail = carts.map((item) => {
+      return {
+        bookName: item.data.mainText,
+        quantity: item.quantity,
+        _id: item._id,
+      };
+    });
+
+    const data = {
+      name: fullName,
+      address: address,
+      phone: phone,
+      totalPrice: totalAmount,
+      detail: detail,
+    };
+
+    let res = await callCreateOrder(data);
+    console.log(res);
+    if (res && res.data) {
+      dispatch(doPlaceOrder());
+      message.success("Đặt hàng thành công!");
+      form.resetFields();
+    } else {
+      notification.error({
+        message: "Đã có lỗi xảy ra",
+        description: res.message,
+        duration: 5,
+      });
+    }
     console.log(values);
   };
 
@@ -133,9 +176,7 @@ const PaymentPage = () => {
                         label="Hình thức thanh toán"
                         labelCol={{ span: 24 }}
                       >
-                        <Radio value="a" checked>
-                          Thanh toán khi nhận hàng
-                        </Radio>
+                        <Radio checked>Thanh toán khi nhận hàng</Radio>
                       </Form.Item>
                     </div>
                   </Col>
@@ -143,12 +184,22 @@ const PaymentPage = () => {
                 <Divider></Divider>
                 <Row span={24}>
                   <Col span={24}>
-                    <div className="price-product">
-                      <div>Tổng tiền</div>
-                      <div className="total-price" name="totalPrice">
+                    <Form.Item label="Tổng tiền">
+                      {/* <div className="price-product"> */}
+                      {/* <div>Tổng tiền</div> */}
+                      <div
+                        className="total-price"
+                        style={{
+                          display: "flex",
+                          justifyContent: "flex-end",
+                          color: "red",
+                          fontSize: "18px",
+                        }}
+                      >
                         {formattedTotal}
                       </div>
-                    </div>
+                      {/* </div> */}
+                    </Form.Item>
                   </Col>
                 </Row>
               </Form>
