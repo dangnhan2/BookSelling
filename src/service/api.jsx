@@ -118,3 +118,7 @@ export const getBookWithId = (_id) => {
 export const callCreateOrder = (data) => {
   return axios.post("/api/v1/order", { ...data });
 };
+
+export const callOrdersHistory = () => {
+  return axios.get(`/api/v1/history`);
+};

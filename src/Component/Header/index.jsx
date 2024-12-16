@@ -26,10 +26,19 @@ const Header = () => {
   const moveToDashboard = () => {
     navigate("/admin");
   };
+
+  const moveToHistory = () => {
+    navigate("/history");
+  };
   const items = [
     {
       label: <label>Quản lý tài khoản</label>,
       key: "account",
+    },
+    {
+      label: <label>Lịch sử mua hàng</label>,
+      key: "history",
+      onClick: moveToHistory,
     },
 
     user?.role === "ADMIN" && {
