@@ -15,7 +15,9 @@ import "./Payment.scss";
 import { useEffect } from "react";
 import { callCreateOrder } from "../../service/api";
 import { doPlaceOrder } from "../../redux/order/order.slice";
+import { useNavigate } from "react-router-dom";
 const PaymentPage = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const carts = useSelector((state) => state.order.cart);
   const user = useSelector((state) => state.account.user);
@@ -50,6 +52,7 @@ const PaymentPage = () => {
     console.log(res);
     if (res && res.data) {
       dispatch(doPlaceOrder());
+      navigate("/orderSuccess");
       message.success("Đặt hàng thành công!");
       form.resetFields();
     } else {

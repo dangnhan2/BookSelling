@@ -10,7 +10,7 @@ const NoOder = () => {
     justifyContent: "center",
     backgroundColor: "white",
     textAlign: "center",
-    height: "500px",
+    height: "150%",
   };
   return (
     <div style={myStyle}>

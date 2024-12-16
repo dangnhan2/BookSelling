@@ -1,11 +1,9 @@
-.container {
+.container-items {
   display: flex;
   flex-direction: column;
   gap: 10px;
   cursor: pointer;
-  .container:hover {
-    background-color: grey;
-  }
+  height: max-content;
   .container-product {
     display: flex;
     gap: 10px;

@@ -20,6 +20,7 @@ import UserTable from "./pages/TableUser/TableUser.jsx";
 import BookPageDetail from "./pages/bookDetail/index.jsx";
 import Order from "./pages/order/Order.jsx";
 import PaymentPage from "./pages/payment/PaymentPage.jsx";
+import SuccessPaymentPage from "./pages/successPayment/SuccessPayment.jsx";
 const Layout = () => {
   return (
     <div className="lay-out">
@@ -74,6 +75,10 @@ function App() {
         {
           path: "payment",
           element: <PaymentPage />,
+        },
+        {
+          path: "orderSuccess",
+          element: <SuccessPaymentPage />,
         },
       ],
     },

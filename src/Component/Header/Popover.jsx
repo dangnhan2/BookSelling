@@ -55,7 +55,7 @@ const PopoverCart = () => {
   };
   return (
     <>
-      <div className="container">
+      <div className="container-items">
         {cart.length === 0 ? (
           <NoOder></NoOder>
         ) : (
