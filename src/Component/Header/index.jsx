@@ -10,6 +10,7 @@ import { Dropdown, Space, Avatar } from "antd";
 import { useNavigate } from "react-router";
 import { UserLogout } from "../../redux/account/account.slice";
 import PopoverCart from "./Popover";
+import ManageAccount from "../InfoUser/ManageAccount";
 const Header = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   const isAuthenticated = useSelector((state) => state.account.isAuthenticated);
@@ -17,6 +18,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const quantity = useSelector((state) => state.order.cart.length);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const handleLogout = () => {
     dispatch(UserLogout());
     navigate("/");
@@ -30,10 +32,16 @@ const Header = () => {
   const moveToHistory = () => {
     navigate("/history");
   };
+
+  const openInfoModal = () => {
+    setIsModalOpen(true);
+  };
+
   const items = [
     {
       label: <label>Quản lý tài khoản</label>,
       key: "account",
+      onClick: openInfoModal,
     },
     {
       label: <label>Lịch sử mua hàng</label>,
@@ -139,6 +147,10 @@ const Header = () => {
         <p onClick={handleLogout}>Đăng xuất</p>
         <Divider />
       </Drawer>
+      <ManageAccount
+        isModalOpen={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+      ></ManageAccount>
     </>
   );
 };

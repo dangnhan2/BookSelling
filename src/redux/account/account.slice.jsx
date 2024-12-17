@@ -12,6 +12,7 @@ const initialState = {
     avatar: "",
     id: "",
   },
+  tempAvatar: "",
 };
 
 export const UserLogout = createAsyncThunk("user/logout", async () => {
@@ -35,6 +36,17 @@ export const accountSlice = createSlice({
       state.isLoading = false;
       state.user = action.payload;
     },
+    doUploadAvatarAction: (state, action) => {
+      state.tempAvatar = action.payload.avatar;
+      // state.user.avatar = action.payload.avatar;
+      // console.log(state.tempAvatar);
+    },
+    doUpdateUserInfoAction: (state, action) => {
+      state.user.avatar = action.payload.avatar;
+      state.user.phone = action.payload.phone;
+      state.user.fullName = action.payload.fullName;
+      // console.log(state.user);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(UserLogout.fulfilled, (state) => {
@@ -54,6 +66,11 @@ export const accountSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { doLoginAction, doGetAction } = accountSlice.actions;
+export const {
+  doLoginAction,
+  doGetAction,
+  doUploadAvatarAction,
+  doUpdateUserInfoAction,
+} = accountSlice.actions;
 
 export default accountSlice.reducer;
