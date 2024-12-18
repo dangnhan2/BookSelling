@@ -31,7 +31,7 @@ const BookPage = (props) => {
   const [total, setTotal] = useState();
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [loadingDelete, setLoadingDelete] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
   const [sorterField, setSorter] = useState("");
   const [filterField, setFilterField] = useState("");
   const [modal, setModal] = useState(false);
@@ -76,12 +76,13 @@ const BookPage = (props) => {
     }
   };
 
-  const confirm = async (_id) => {
-    setLoadingDelete(true);
-    let res = await callDeleteBook(_id);
-    setLoadingDelete(false);
+  const confirm = async (id) => {
+    setConfirmLoading(true);
+    let res = await callDeleteBook(id);
+    setConfirmLoading(false);
     if (res && res.data) {
       message.success("Delete Successed!");
+      // setOpenDeleteModal(false);
       getBook();
     } else {
       notification.error({
@@ -93,8 +94,6 @@ const BookPage = (props) => {
   };
 
   const cancel = () => {
-    // console.log(e);
-    // message.error("Click on No");
     setOpenDeleteModal(false);
   };
 
@@ -147,19 +146,32 @@ const BookPage = (props) => {
         // console.log("check: ", record);
         return (
           <div style={{ width: 120 }}>
-            <Popconfirm
+            {/* <Popconfirm
               title="Delete the book"
               description="Are you sure to delete this book?"
               onConfirm={() => confirm(record._id)}
               onCancel={cancel}
               open={isOpenDeleteModal}
               okButtonProps={{
-                loading: loadingDelete,
+                loading: confirmLoading,
               }}
               okText="Yes"
               cancelText="No"
             >
-              <Button onClick={() => setOpenDeleteModal(true)}>
+              <button onClick={() => setOpenDeleteModal(true)}>
+                <MdOutlineDeleteOutline />
+              </button>
+            </Popconfirm> */}
+
+            <Popconfirm
+              placement="topRight"
+              title="Delete the book"
+              description="Are you sure to delete this book?"
+              onConfirm={() => confirm(record._id)}
+              okText="Yes"
+              cancelText="No"
+            >
+              <Button>
                 <MdOutlineDeleteOutline />
               </Button>
             </Popconfirm>

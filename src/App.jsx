@@ -18,10 +18,11 @@ import ProtectedRoute from "./Component/ProtectedRoute/index.jsx";
 import LayoutAdmin from "./Component/LayoutAdmin/LayoutAdmin.jsx";
 import UserTable from "./pages/TableUser/TableUser.jsx";
 import BookPageDetail from "./pages/bookDetail/index.jsx";
-import Order from "./pages/order/Order.jsx";
+import Order from "./pages/orderPage/Order.jsx";
 import PaymentPage from "./pages/payment/PaymentPage.jsx";
 import SuccessPaymentPage from "./pages/successPayment/SuccessPayment.jsx";
 import HistoryPage from "./pages/historyPage/HistoryPage.jsx";
+import OrderTable from "./pages/order/OrderTable.jsx";
 const Layout = () => {
   return (
     <div className="lay-out">
@@ -101,6 +102,7 @@ function App() {
             </ProtectedRoute>
           ),
         },
+
         {
           path: "contact",
           element: <ContactPage />,
@@ -112,6 +114,10 @@ function App() {
         {
           path: "/admin/user",
           element: <UserTable />,
+        },
+        {
+          path: "/admin/order",
+          element: <OrderTable />,
         },
       ],
     },
