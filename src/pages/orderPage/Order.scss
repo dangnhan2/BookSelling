@@ -1,0 +1,58 @@
+.container-inf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+  padding: 10px 15px;
+  margin: 15px;
+  border-radius: 4px;
+
+  img {
+    width: 60px;
+    height: 70px;
+  }
+
+  input[type="number"] {
+    width: 60px;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+
+  .delete-btn button {
+    border: none;
+    background-color: transparent;
+  }
+}
+
+.container-price {
+  background-color: #ffffff;
+  padding: 15px 15px;
+  margin: 15px;
+
+  .price-product {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+
+    .total-price {
+      font-size: 18px;
+      color: red;
+    }
+  }
+
+  .btn {
+    width: 100%;
+  }
+  .btn button {
+    background-color: #ee4d2d;
+    line-height: 40px;
+    width: 100%;
+    border-radius: 2px;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+  }
+  .btn button:hover {
+    opacity: 0.9;
+  }
+}

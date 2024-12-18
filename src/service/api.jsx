@@ -107,8 +107,8 @@ export const callUpdateBook = (
   });
 };
 
-export const callDeleteBook = (_id) => {
-  return axios.delete(`/api/v1/book/${_id}`);
+export const callDeleteBook = (id) => {
+  return axios.delete(`/api/v1/book/${id}`);
 };
 
 export const getBookWithId = (_id) => {
@@ -147,4 +147,12 @@ export const callUpdatePassword = (email, oldpass, newpass) => {
     oldpass,
     newpass,
   });
+};
+
+export const callDashboard = () => {
+  return axios.get("/api/v1/database/dashboard");
+};
+
+export const orderPagination = (query) => {
+  return axios.get(`/api/v1/order?${query}`);
 };
